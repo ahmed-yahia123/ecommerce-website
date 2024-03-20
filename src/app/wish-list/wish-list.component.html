@@ -1,0 +1,28 @@
+<h2 class="text-center my-4">My Wishlist</h2>
+<div>
+    <div class="row border-top border-bottom py-3 my-3" *ngFor="let item of _Products">
+        <div class="col-lg-3 row g-3">
+            <div class="col-lg-2 d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-trash cursor-pointer fa-xl text-danger" (click)="deleteItem(item._id)"></i>
+            </div>
+            <div class="col-lg-5 d-flex justify-content-center align-items-center">
+                <img [src]="item.imageCover" [alt]="item.title" class="w-100">
+            </div>
+            <div class="col-lg-5 d-flex justify-content-center align-items-center">
+                <h5 class="text-secondary">{{item.title.length > 8 ? item.title.split(" ",8).join(" ") + "....": item.title}}</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 d-flex justify-content-center align-items-center g-3">
+            <p>Price: <span class="text-main fw-bold">{{item.price}} EGP</span></p>
+        </div>
+        <div class="col-lg-3 d-flex justify-content-evenly align-items-center flex-column g-3 gap-2">
+            <span class="text-bg-success rounded-3 p-1">{{item.category.name}}</span>
+            <span class="text-bg-warning rounded-3 p-1">{{item.brand.name}}</span>
+        </div>
+        <div class="col-lg-3 d-flex justify-content-evenly align-items-center flex-column g-3 gap-2">
+            <button class="btn bg-main text-light" (click)="addToCart(item._id)">Add To Cart</button>
+            <button class="btn btn-outline-success" [routerLink]="['/details',item._id]">Show Details</button>
+        </div>
+    </div>
+</div>
+<h2 class="text-center" *ngIf="!_Products">No Product Has Been Added Here</h2>

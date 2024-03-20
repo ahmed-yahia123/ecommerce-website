@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center align-items-center main">
+<div class="w-75">
+    <h1 class="mb-5 text-main">Register Now :</h1>
+    <h2 class="alert alert-danger" *ngIf="errMsg">{{errMsg}}</h2>
+    <form (ngSubmit)="register(registerForm)" [formGroup]="registerForm">
+        <div class="mb-3">
+            <label>Name:</label>
+            <input type="text" class="form-control w-100" formControlName="name">
+            <div class="alert alert-danger" *ngIf="registerForm.get('name')?.errors && registerForm.get('name')?.touched">
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('name')?.errors?.['required']">name is required</p>
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('name')?.errors?.['minlength']">minimum length of name should be 3 characters</p>
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('name')?.errors?.['maxlength']">maximum length of name should be 13 characters</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>E-mail:</label>
+            <input type="email" class="form-control w-100" formControlName="email">
+            <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</p>
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('email')?.errors?.['email']">it should had the email form (example@gmail.com)</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Password:</label>
+            <input type="password" class="form-control w-100" formControlName="password">
+            <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('password')?.errors?.['required']">password is required</p>
+                <ul class="text-capitalize fw-bold" *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                    <li>At least one small character</li>
+                    <li>At least one capital character</li>
+                    <li>At least one number</li>
+                    <li>At least one special character[@, $, ., #, !, %, *, ?, &, ^]</li>
+                    <li>the total length must be in the range [8-15]</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Re-Password:</label>
+            <input type="password" class="form-control w-100" formControlName="rePassword"> 
+            <div class="alert alert-danger" *ngIf="registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched">
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('rePassword')?.errors?.['required']">rePassword is required</p>
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('rePassword')?.errors?.['pattern']">the rePassword should match the password</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Phone:</label>
+            <input type="tel" class="form-control w-100" formControlName="phone">
+            <div class="alert alert-danger"
+                *ngIf="registerForm.get('phone')?.errors && registerForm.get('phone')?.touched">
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('phone')?.errors?.['required']">phone is required</p>
+                <p class="text-capitalize fw-bold" *ngIf="registerForm.get('phone')?.errors?.['pattern']">please enter a valid phone number</p>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="submit" class="btn text-light bg-main px-4" [disabled]="registerForm.invalid">Submit <i class="fa-solid fa-arrows-spin fa-spin" *ngIf="isLoading"></i></button>
+        </div>
+    </form>
+</div>
+</div>

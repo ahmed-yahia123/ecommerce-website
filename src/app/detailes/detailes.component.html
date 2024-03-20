@@ -1,0 +1,29 @@
+<div class="row g-4 align-items-center main" *ngIf="isDataLoaded">
+    <div class="col-lg-4">
+        <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let slide of productDetails.images">
+                <ng-template carouselSlide [id]="productDetails._id">
+                    <img [src]="slide" [alt]="productDetails.title" [title]="productDetails.title" class="w-100">
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+    <div class="col-lg-8">
+        <h1 class="mb-3 fs-2">{{productDetails.title}}</h1>
+        <p class="ms-3">Brand: {{productDetails.brand.name}}</p>
+        <p class="px-2 text-secondary">{{productDetails.description}}</p>
+        <p class="text-main fw-bold">{{productDetails.category.name}}</p>
+        <div class="mb-3 d-flex gap-2">
+            <span class="text-bg-warning p-1 rounded-3">Sold: {{productDetails.sold}}</span>
+            <span class="text-bg-success p-1 rounded-3">Quantity Left: {{productDetails.quantity}}</span>
+        </div>
+        <div class="d-flex justify-content-between align-content-center">
+            <p>{{productDetails.price}} EGP</p>
+            <div>
+                <i class="fa-solid fa-star rating-color me-2"></i>
+                <span class="fw-bold">{{productDetails.ratingsAverage}}</span>
+            </div>
+        </div>
+        <button class="btn w-100 bg-main text-light" (click)="addItem(productDetails._id)">Add To Cart <i class="fa-solid fa-plus ms-2"></i></button>
+    </div>
+</div>
